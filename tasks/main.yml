@@ -1,2 +1,39 @@
 ---
 # tasks file for gerrit
+
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags: gerrit
+
+- include: CentOS.yml
+  when: ansible_distribution == "CentOS"
+  tags: gerrit
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+  tags: gerrit
+
+- name: Create Gerrit installation directory
+  file: >
+    path=/opt/gerrit
+    owner=root
+    group=root
+    mode=0755
+    state=directory
+  tags: gerrit
+
+- name: Download Gerrit
+  get_url: >
+    url=https://gerrit-releases.storage.googleapis.com/gerrit-{{ gerrit_version }}.war
+    dest=/opt/gerrit/gerrit-{{ gerrit_version }}.war
+    sha256sum={{ gerrit_sha256sum }}
+  tags: gerrit
+
+- name: Create Gerrit symlink
+  file: >
+    src=/opt/gerrit/gerrit-{{ gerrit_version }}.war
+    dest=/opt/gerrit/gerrit.war
+    owner=root
+    group=root
+    state=link
+  tags: gerrit
