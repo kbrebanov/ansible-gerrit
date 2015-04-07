@@ -1,31 +1,42 @@
-Role Name
-=========
+gerrit
+======
 
-A brief description of the role goes here.
+Installs Gerrit
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires Ansible 1.4 or higher.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Name             | Default                                                          | Description                   |
+|------------------|------------------------------------------------------------------|-------------------------------|
+| gerrit_version   | 2.10.2                                                           | Gerrit version to install     |
+| gerrit_sha256sum | 3e113342ad053af3997fdc5e361ee71f77f34efb72ed1a266600ed4aa80e7f6d | SHA 256 sum of Gerrit version |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- kbrebanov.java
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Install Gerrit
+```
+- hosts: all
+  roles:
+    - { role: kbrebanov.gerrit }
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Install Gerrit specifying version
+```
+- hosts: all
+  roles:
+    - { role: kbrebanov.gerrit, gerrit_version: 2.9.3 gerrit_sha256sum: fad71b288ecaf3241ea11fecebb2d5be4cfbdfade3e2037d23b94cce3dd3bc48 }
+```
 
 License
 -------
@@ -35,4 +46,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Kevin Brebanov
