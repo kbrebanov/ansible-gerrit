@@ -13,8 +13,8 @@ Role Variables
 
 | Name             | Default                                                          | Description                   |
 |------------------|------------------------------------------------------------------|-------------------------------|
-| gerrit_version   | 2.10.2                                                           | Gerrit version to install     |
-| gerrit_sha256sum | 3e113342ad053af3997fdc5e361ee71f77f34efb72ed1a266600ed4aa80e7f6d | SHA 256 sum of Gerrit version |
+| gerrit_version   | 2.11                                                             | Gerrit version to install     |
+| gerrit_sha256sum | 05c155c454f06c324e89863e6c6a9c814833c7caea7b38f6c9b360336b30b96d | SHA 256 sum of Gerrit version |
 
 Dependencies
 ------------
