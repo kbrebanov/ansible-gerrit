@@ -4,3 +4,9 @@
 - name: restart gerrit
   service: name={{ gerrit_service_name }} state=restarted
   tags: gerrit
+
+- name: reindex gerrit
+  sudo: yes
+  sudo_user: "{{ gerrit_user }}"
+  command: java -jar /opt/gerrit/gerrit.war reindex -d {{ gerrit_site_dir }}
+  tags: gerrit
