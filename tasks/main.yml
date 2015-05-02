@@ -89,3 +89,19 @@
     group={{ gerrit_group }}
     mode=0600
   tags: gerrit
+
+- name: Create Gerrit init file
+  template: >
+    src=gerrit.sh.j2
+    dest={{ gerrit_site_dir }}/bin/gerrit.sh
+    owner={{ gerrit_user }}
+    group={{ gerrit_group }}
+    mode=0755
+  tags: gerrit
+
+- name: Create Gerrit init file link
+  file: >
+    src={{ gerrit_site_dir }}/bin/gerrit.sh
+    dest=/etc/init.d/gerrit
+    state=link
+  tags: gerrit
