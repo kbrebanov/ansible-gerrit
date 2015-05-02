@@ -2,5 +2,5 @@
 # handlers file for gerrit
 
 - name: restart gerrit
-  service: name=gerrit state=restarted
+  service: name={{ gerrit_service_name }} state=restarted
   tags: gerrit

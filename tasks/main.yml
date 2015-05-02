@@ -110,5 +110,5 @@
   tags: gerrit
 
 - name: Ensure Gerrit service is started and enabled on boot
-  service: name=gerrit state=started enabled=yes
+  service: name={{ gerrit_service_name }} state=started enabled=yes
   tags: gerrit
