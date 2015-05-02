@@ -105,3 +105,7 @@
     dest=/etc/init.d/gerrit
     state=link
   tags: gerrit
+
+- name: Ensure Gerrit service is started and enabled on boot
+  service: name=gerrit state=started enabled=yes
+  tags: gerrit
