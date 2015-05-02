@@ -70,6 +70,7 @@
     owner=root
     group=root
     mode=0644
+  notify: restart gerrit
   tags: gerrit
 
 - name: Create Gerrit configuration file
@@ -79,6 +80,7 @@
     owner={{ gerrit_user }}
     group={{ gerrit_group }}
     mode=0644
+  notify: restart gerrit
   tags: gerrit
 
 - name: Create Gerrit secure configuration file
@@ -88,6 +90,7 @@
     owner={{ gerrit_user }}
     group={{ gerrit_group }}
     mode=0600
+  notify: restart gerrit
   tags: gerrit
 
 - name: Create Gerrit init file

@@ -1,2 +1,6 @@
 ---
 # handlers file for gerrit
+
+- name: restart gerrit
+  service: name=gerrit state=restarted
+  tags: gerrit
