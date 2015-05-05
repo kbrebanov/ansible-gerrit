@@ -1,0 +1,26 @@
+---
+# tasks file for gerrit (PostgreSQL specific)
+
+- name: Create Gerrit PostgreSQL database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: >
+    name={{ gerrit_database_db }}
+    encoding='UTF-8'
+    state=present
+  tags:
+    - gerrit
+    - postgresql
+
+- name: Create Gerrit PostgreSQL database user
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: >
+    name={{ gerrit_database_username }}
+    db={{ gerrit_database_db }}
+    password={{ gerrit_database_password }}
+    priv=ALL
+    state=present
+  tags:
+    - gerrit
+    - postgresql
