@@ -14,3 +14,14 @@ gerrit_database_hostname: 'localhost'
 gerrit_httpd_listen_url: 'http://*:8080/'
 gerrit_sendemail_smtp_server: 'localhost'
 gerrit_sshd_listen_address: '*:29418'
+
+gerrit_ldap_server: ldap://ldap.example.com
+gerrit_ldap_account_base: ou=people,dc=example,dc=com
+gerrit_ldap_account_scope: subtree
+gerrit_ldap_account_pattern: (uid=${username})
+gerrit_ldap_account_full_name: displayName
+gerrit_ldap_account_email_address: mail
+gerrit_ldap_group_base: ou=groups,dc=example,dc=com
+gerrit_ldap_group_scope: subtree
+gerrit_ldap_group_pattern: (cn=${groupname})
+gerrit_ldap_group_member_pattern: (|(memberUid=${username})(gidNumber=${gidNumber}))
