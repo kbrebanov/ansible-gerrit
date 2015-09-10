@@ -30,7 +30,7 @@
 
 - name: Download Gerrit
   get_url: >
-    url=https://gerrit-releases.storage.googleapis.com/gerrit-{{ gerrit_version }}.war
+    url={{ gerrit_download_server }}/gerrit-{{ gerrit_version }}.war
     dest=/opt/gerrit/gerrit-{{ gerrit_version }}.war
     sha256sum={{ gerrit_sha256sum }}
   tags: gerrit
