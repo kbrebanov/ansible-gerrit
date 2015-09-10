@@ -13,8 +13,8 @@ Role Variables
 
 | Name                                   | Default                                                          | Description                                                                                                               |
 |----------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| gerrit_version                         | 2.11                                                             | Gerrit version to install                                                                                                 |
-| gerrit_sha256sum                       | 05c155c454f06c324e89863e6c6a9c814833c7caea7b38f6c9b360336b30b96d | SHA 256 sum of Gerrit version                                                                                             |
+| gerrit_version                         | 2.11.3                                                           | Gerrit version to install                                                                                                 |
+| gerrit_sha256sum                       | 3ec7998a7307e54cabacfdb04882d2852727bb341bf058a6a2beadd8f750a910 | SHA 256 sum of Gerrit version                                                                                             |
 | gerrit_download_server                 | 'https://gerrit-releases.storage.googleapis.com'                 | Server to download the Gerrit war file from                                                                               |
 | gerrit_auth_type                       | 'OPENID'                                                         | Type of user authentication                                                                                               |
 | gerrit_auth_register_email_private_key | Not set. Gerrit will generate a random key during site init.     | Private key to use for token verification when adding a new email address                                                 |
