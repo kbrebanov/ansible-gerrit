@@ -1,8 +1,9 @@
 ---
 # defaults file for gerrit
 
-gerrit_version: 2.11
-gerrit_sha256sum: 05c155c454f06c324e89863e6c6a9c814833c7caea7b38f6c9b360336b30b96d
+gerrit_download_server: https://www.gerritcodereview.com/download
+gerrit_version: 2.11.3
+gerrit_sha256sum: 3ec7998a7307e54cabacfdb04882d2852727bb341bf058a6a2beadd8f750a910
 
 gerrit_auth_type: 'OPENID'
 gerrit_canonical_web_url: 'http://localhost:8080/'
