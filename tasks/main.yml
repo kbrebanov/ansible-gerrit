@@ -102,7 +102,11 @@
 - name: Initialize Gerrit
   sudo: yes
   sudo_user: "{{ gerrit_user }}"
-  command: java -jar /opt/gerrit/gerrit.war init --batch --no-auto-start -d {{ gerrit_site_dir }}
+  command: >
+    java -jar /opt/gerrit/gerrit.war init
+    --batch
+    --no-auto-start
+    -d {{ gerrit_site_dir }}
   register: initialization
   tags: gerrit
 
