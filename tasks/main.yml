@@ -107,6 +107,7 @@
     --batch
     --no-auto-start
     -d {{ gerrit_site_dir }}
+    {% for plugin in gerrit_install_plugins %} --install-plugin {{ plugin }} {% endfor %}
   register: initialization
   tags: gerrit
 
