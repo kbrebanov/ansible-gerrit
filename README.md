@@ -37,7 +37,7 @@ Role Variables
 | gerrit_ldap_group_scope                | subtree                                                          | Scope of the search performed for group objects (one, sub or subtree, base or object)                                     |
 | gerrit_ldap_group_pattern              | (cn=${groupname})                                                | Query pattern used when searching for an LDAP group to connect to a Gerrit group                                          |
 | gerrit_ldap_group_member_pattern       | (|(memberUid=${username})(gidNumber=${gidNumber}))               | Query pattern to use when searching for the groups that a user account is currently a member of                           |
-| gerrit_plugins_allow_remote_Admin      | false                                                            | Allow remote admin of plugins                                                                                             |
+| gerrit_plugins_allow_remote_admin      | false                                                            | Allow remote admin of plugins                                                                                             |
 
 Dependencies
 ------------
