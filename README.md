@@ -44,6 +44,8 @@ Dependencies
 ------------
 
 - kbrebanov.java
+- kbrebanov.git
+- kbrebanov.postgresql
 
 Example Playbook
 ----------------
