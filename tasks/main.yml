@@ -101,13 +101,13 @@
 
 - name: Set Initialization Options
   set_fact:
-    init_options: >
+    gerrit_init_options: >
       {% for plugin in gerrit_install_plugins %} --install-plugin {{ plugin }} {% endfor %}
   tags: gerrit
 
 - name: Save Initialization Options
   copy: >
-    content="{{ init_options }}"
+    content="{{ gerrit_init_options }}"
     dest={{ gerrit_site_dir }}/tmp/init_options
   register: init_options_log
   tags: gerrit
@@ -120,7 +120,7 @@
     --batch
     --no-auto-start
     -d {{ gerrit_site_dir }}
-    {{ init_options }}
+    {{ gerrit_init_options }}
   register: initialization
   when: init_options_log.changed
   tags: gerrit
