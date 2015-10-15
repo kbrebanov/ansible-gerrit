@@ -13,8 +13,8 @@ Role Variables
 
 | Name                                   | Default                                                          | Description                                                                                                               |
 |----------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| gerrit_version                         | 2.11.3                                                           | Gerrit version to install                                                                                                 |
-| gerrit_sha256sum                       | 3ec7998a7307e54cabacfdb04882d2852727bb341bf058a6a2beadd8f750a910 | SHA 256 sum of Gerrit version                                                                                             |
+| gerrit_version                         | 2.11.4                                                           | Gerrit version to install                                                                                                 |
+| gerrit_sha256sum                       | cb1794ccdf22da4e0ba5a431b832578017bbe53152ce028f46d2ebbb611705aa | SHA 256 sum of Gerrit version                                                                                             |
 | gerrit_download_server                 | 'https://www.gerritcodereview.com/download'                      | Server to download the Gerrit war file from                                                                               |
 | gerrit_install_plugins                 | []                                                               | List of core plugins to install during initialization                                                                     |
 | gerrit_auth_type                       | 'OPENID'                                                         | Type of user authentication                                                                                               |
