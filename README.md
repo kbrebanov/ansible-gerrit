@@ -1,6 +1,8 @@
 gerrit
 ======
 
+[![Ansible Role](https://img.shields.io/ansible/role/5625.svg)](https://galaxy.ansible.com/list#/roles/5625)
+
 Installs Gerrit
 
 Requirements
