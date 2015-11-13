@@ -2,8 +2,8 @@
 # defaults file for gerrit
 
 gerrit_download_server: https://www.gerritcodereview.com/download
-gerrit_version: 2.11.4
-gerrit_sha256sum: cb1794ccdf22da4e0ba5a431b832578017bbe53152ce028f46d2ebbb611705aa
+gerrit_version: 2.11.5
+gerrit_sha256sum: 2b252f2e2c65c4fe20eaac8f060f8fce89579d3fcdfb07b369e669578b77eeda
 gerrit_install_plugins: []
 
 gerrit_auth_type: 'OPENID'
