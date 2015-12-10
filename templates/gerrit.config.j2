@@ -15,6 +15,9 @@
 {% if gerrit_auth_type in ['LDAP', 'HTTP_LDAP'] %}
 [ldap]
         server = {{ gerrit_ldap_server }}
+{% if gerrit_ldap_username %}
+        username = {{ gerrit_ldap_username }}
+{% endif %}
         accountBase = {{ gerrit_ldap_account_base }}
         accountScope = {{ gerrit_ldap_account_scope }}
         accountPattern = {{ gerrit_ldap_account_pattern }}
