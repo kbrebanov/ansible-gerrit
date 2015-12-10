@@ -1,7 +1,7 @@
 ---
 # defaults file for gerrit
 
-gerrit_download_server: https://www.gerritcodereview.com/download
+gerrit_download_server: https://gerrit-releases.storage.googleapis.com
 gerrit_version: 2.11.5
 gerrit_sha256sum: 2b252f2e2c65c4fe20eaac8f060f8fce89579d3fcdfb07b369e669578b77eeda
 gerrit_install_plugins: []
