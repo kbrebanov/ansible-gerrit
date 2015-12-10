@@ -6,3 +6,7 @@
 [database]
         password = {{ gerrit_database_password }}
 {% endif %}
+{% if gerrit_auth_type in ['LDAP', 'HTTP_LDAP'] and gerrit_ldap_password %}
+[ldap]
+        password = {{ gerrit_ldap_password }}
+{% endif %}
