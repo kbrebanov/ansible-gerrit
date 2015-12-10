@@ -163,7 +163,7 @@
 - name: Create Gerrit init file link
   file: >
     src={{ gerrit_site_dir }}/bin/gerrit.sh
-    dest=/etc/init.d/gerrit
+    dest=/etc/init.d/{{ gerrit_service_name }}
     state=link
   tags: gerrit
 
