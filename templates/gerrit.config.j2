@@ -12,7 +12,7 @@
         type = LUCENE
 [auth]
         type = {{ gerrit_auth_type }}
-{% if gerrit_auth_type == 'LDAP' %}
+{% if gerrit_auth_type in ['LDAP', 'HTTP_LDAP'] %}
 [ldap]
         server = {{ gerrit_ldap_server }}
         accountBase = {{ gerrit_ldap_account_base }}
