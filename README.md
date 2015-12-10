@@ -63,7 +63,7 @@ Install Gerrit specifying version
 ```
 - hosts: all
   roles:
-    - { role: kbrebanov.gerrit, gerrit_version: 2.9.3 gerrit_sha256sum: fad71b288ecaf3241ea11fecebb2d5be4cfbdfade3e2037d23b94cce3dd3bc48 }
+    - { role: kbrebanov.gerrit, gerrit_version: 2.9.3, gerrit_sha256sum: fad71b288ecaf3241ea11fecebb2d5be4cfbdfade3e2037d23b94cce3dd3bc48 }
 ```
 
 License
