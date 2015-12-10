@@ -105,6 +105,15 @@
       {% for plugin in gerrit_install_plugins %} --install-plugin {{ plugin }} {% endfor %}
   tags: gerrit
 
+- name: Create Gerrit tmp directory
+  file: >
+    path={{ gerrit_site_dir }}/tmp
+    owner={{ gerrit_user }}
+    group={{ gerrit_group }}
+    mode=0755
+    state=directory
+  tags: gerrit
+
 - name: Save Initialization Options
   copy: >
     content="{{ gerrit_init_options }}"
