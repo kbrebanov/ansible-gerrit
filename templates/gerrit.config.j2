@@ -23,6 +23,9 @@
         accountPattern = {{ gerrit_ldap_account_pattern }}
         accountFullName = {{ gerrit_ldap_account_full_name }}
         accountEmailAddress = {{ gerrit_ldap_account_email_address }}
+{% if gerrit_ldap_account_ssh_username is defined %}
+        accountSshUserName = {{ gerrit_ldap_account_ssh_username }}
+{% endif %}
         groupBase = {{ gerrit_ldap_group_base }}
         groupPattern = {{ gerrit_ldap_group_pattern }}
         groupMemberPattern = {{ gerrit_ldap_group_member_pattern }}
