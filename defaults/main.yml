@@ -27,5 +27,6 @@ gerrit_ldap_group_base: ou=groups,dc=example,dc=com
 gerrit_ldap_group_scope: subtree
 gerrit_ldap_group_pattern: (cn=${groupname})
 gerrit_ldap_group_member_pattern: (|(memberUid=${username})(gidNumber=${gidNumber}))
+gerrit_ldap_group_name: cn
 
 gerrit_plugins_allow_remote_admin: false
