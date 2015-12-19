@@ -9,6 +9,7 @@ gerrit_install_plugins: []
 
 gerrit_auth_type: 'OPENID'
 gerrit_canonical_web_url: 'http://localhost:8080/'
+gerrit_container_java_home: /usr/lib/jvm/java-8-openjdk-amd64/jre
 gerrit_database_type: 'h2'
 gerrit_database_db: 'db/ReviewDB'
 gerrit_database_username: ''

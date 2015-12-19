@@ -32,7 +32,7 @@
         smtpServer = {{ gerrit_sendemail_smtp_server }}
 [container]
         user = {{ gerrit_user }}
-        javaHome = /usr/lib/jvm/java-8-openjdk-amd64/jre
+        javaHome = {{ gerrit_container_java_home }}
 [sshd]
         listenAddress = {{ gerrit_sshd_listen_address }}
 [httpd]
