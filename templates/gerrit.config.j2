@@ -15,7 +15,7 @@
 {% if gerrit_auth_type in ['LDAP', 'HTTP_LDAP'] %}
 [ldap]
         server = {{ gerrit_ldap_server }}
-{% if gerrit_ldap_username %}
+{% if gerrit_ldap_username is defined %}
         username = {{ gerrit_ldap_username }}
 {% endif %}
         accountBase = {{ gerrit_ldap_account_base }}
@@ -23,10 +23,14 @@
         accountPattern = {{ gerrit_ldap_account_pattern }}
         accountFullName = {{ gerrit_ldap_account_full_name }}
         accountEmailAddress = {{ gerrit_ldap_account_email_address }}
+{% if gerrit_ldap_account_ssh_username is defined %}
+        accountSshUserName = {{ gerrit_ldap_account_ssh_username }}
+{% endif %}
         groupBase = {{ gerrit_ldap_group_base }}
         groupPattern = {{ gerrit_ldap_group_pattern }}
         groupMemberPattern = {{ gerrit_ldap_group_member_pattern }}
         groupScope = {{ gerrit_ldap_group_scope }}
+        groupName = {{ gerrit_ldap_group_name }}
 {% endif %}
 [sendemail]
         smtpServer = {{ gerrit_sendemail_smtp_server }}
