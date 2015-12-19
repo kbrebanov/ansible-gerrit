@@ -33,6 +33,15 @@
     url={{ gerrit_download_server }}/gerrit-{{ gerrit_version }}.war
     dest=/opt/gerrit/gerrit-{{ gerrit_version }}.war
     sha256sum={{ gerrit_sha256sum }}
+  when: not gerrit_download_maven
+  tags: gerrit
+
+- name: Download Gerrit from Maven Repo
+  get_url: >
+    url={{ gerrit_download_server }}/com/google/gerrit/gerrit-war/{{ gerrit_version }}/gerrit-war-{{ gerrit_version }}.war
+    dest=/opt/gerrit/gerrit-{{ gerrit_version }}.war
+    sha256sum={{ gerrit_sha256sum }}
+  when: gerrit_download_maven
   tags: gerrit
 
 - name: Create Gerrit symlink

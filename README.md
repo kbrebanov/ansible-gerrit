@@ -18,6 +18,7 @@ Role Variables
 | gerrit_version                         | 2.11.5                                                           | Gerrit version to install                                                                                                 |
 | gerrit_sha256sum                       | 2b252f2e2c65c4fe20eaac8f060f8fce89579d3fcdfb07b369e669578b77eeda | SHA 256 sum of Gerrit version                                                                                             |
 | gerrit_download_server                 | 'https://gerrit-releases.storage.googleapis.com'                 | Server to download the Gerrit war file from                                                                               |
+| gerrit_download_maven                  | false                                                            | Set to true if the download server is a Maven repository                                                                  |
 | gerrit_install_plugins                 | []                                                               | List of core plugins to install during initialization                                                                     |
 | gerrit_auth_type                       | 'OPENID'                                                         | Type of user authentication                                                                                               |
 | gerrit_auth_register_email_private_key | Not set. Gerrit will generate a random key during site init.     | Private key to use for token verification when adding a new email address                                                 |
@@ -66,6 +67,14 @@ Install Gerrit specifying version
 - hosts: all
   roles:
     - { role: kbrebanov.gerrit, gerrit_version: 2.9.3, gerrit_sha256sum: fad71b288ecaf3241ea11fecebb2d5be4cfbdfade3e2037d23b94cce3dd3bc48 }
+```
+
+Install Gerrit downloading .war file from Maven Central
+```
+- hosts: all
+  roles:
+    - { role: kbrebanov.gerrit, gerrit_version: 2.9.3, gerrit_sha256sum: fad71b288ecaf3241ea11fecebb2d5be4cfbdfade3e2037d23b94cce3dd3bc48,
+        gerrit_download_maven: true, gerrit_download_server: http://repo1.maven.org/maven2 }
 ```
 
 License
