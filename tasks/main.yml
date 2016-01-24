@@ -131,8 +131,9 @@
   tags: gerrit
 
 - name: Initialize Gerrit
-  sudo: yes
-  sudo_user: "{{ gerrit_user }}"
+  become: yes
+  become_user: "{{ gerrit_user }}"
+  become_method: sudo
   command: >
     java -jar /opt/gerrit/gerrit.war init
     --batch
@@ -144,8 +145,9 @@
   tags: gerrit
 
 - name: Reindexing Gerrit
-  sudo: yes
-  sudo_user: "{{ gerrit_user }}"
+  become: yes
+  become_user: "{{ gerrit_user }}"
+  become_method: sudo
   command: java -jar /opt/gerrit/gerrit.war reindex -d {{ gerrit_site_dir }}
   when: initialization.changed
   tags: gerrit
