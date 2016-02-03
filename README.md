@@ -47,6 +47,10 @@ Role Variables
 | gerrit_ldap_group_member_pattern       | (|(memberUid=${username})(gidNumber=${gidNumber}))               | Query pattern to use when searching for the groups that a user account is currently a member of                           |
 | gerrit_ldap_group_name                 | cn                                                               | Name of the attribute on the group object which contains the value to use as the group name in Gerrit                     |
 | gerrit_plugins_allow_remote_admin      | false                                                            | Allow remote admin of plugins                                                                                             |
+| gerrit_user                            | gerrit                                                           | Username of the Gerrit service                                                                                            |
+| gerrit_group                           | gerrit                                                           | Group name of the Gerrit service                                                                                          |
+| gerrit_service_name                    | gerrit                                                           | Service name of the Gerrit service                                                                                        |
+| gerrit_site_dir                        | /var/gerrit                                                      | Gerrit site directory                                                                                                     |
 
 Dependencies
 ------------

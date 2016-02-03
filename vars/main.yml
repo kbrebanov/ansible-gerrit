@@ -1,8 +1,3 @@
 ---
 # vars file for gerrit
 
-gerrit_user: gerrit
-gerrit_group: gerrit
-gerrit_service_name: gerrit
-
-gerrit_site_dir: /var/gerrit
