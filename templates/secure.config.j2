@@ -2,7 +2,7 @@
 {% if gerrit_auth_register_email_private_key is defined %}
         registerEmailPrivateKey = {{ gerrit_auth_register_email_private_key }}
 {% endif %}
-{% if gerrit_database_type == 'postgresql' %}
+{% if gerrit_database_type in ['postgresql', 'mysql'] %}
 [database]
         password = {{ gerrit_database_password }}
 {% endif %}

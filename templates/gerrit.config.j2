@@ -4,7 +4,7 @@
 [database]
         type = {{ gerrit_database_type }}
         database = {{ gerrit_database_db }}
-{% if gerrit_database_type == 'postgresql' %}
+{% if gerrit_database_type in ['postgresql', 'mysql'] %}
         hostname = {{ gerrit_database_hostname }}
         username = {{ gerrit_database_username }}
 {% endif %}
