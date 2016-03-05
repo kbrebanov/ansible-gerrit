@@ -45,3 +45,7 @@
         directory = cache
 [plugins]
         allowRemoteAdmin = {{ gerrit_plugins_allow_remote_admin }}
+{% if gerrit_run_gitweb %}
+[gitweb]
+	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
+{% endif %}
