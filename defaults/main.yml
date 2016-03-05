@@ -32,3 +32,4 @@ gerrit_ldap_group_member_pattern: (|(memberUid=${username})(gidNumber=${gidNumbe
 gerrit_ldap_group_name: cn
 
 gerrit_plugins_allow_remote_admin: false
+gerrit_run_gitweb: false
