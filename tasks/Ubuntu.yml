@@ -1,5 +1,5 @@
 ---
 # tasks file for gerrit (Ubuntu specific)
 - apt:
-    name: github
+    name: gitweb
   when: gerrit_run_gitweb
