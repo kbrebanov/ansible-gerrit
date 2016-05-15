@@ -1,2 +1,15 @@
 ---
 # tasks file for gerrit (Ubuntu specific)
+- name: Install bouncy castle crypto libraries
+  apt: name={{ item }} state=latest
+  with_itmes:
+    - libbcprov-java
+    - libbcpkix-java
+  notify: restart gerrit
+
+- name: Install symlink to bouncy castle into gerrit dir
+  file: path={{ gerrit_site_dir }}/lib/{{ item }}.jar src=/usr/share/java/{{ item }}.jar state=link
+  with_items:
+    - bcprov
+    - bcpkix
+  notify: restart gerrit
