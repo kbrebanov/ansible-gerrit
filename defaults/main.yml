@@ -32,3 +32,7 @@ gerrit_ldap_group_member_pattern: (|(memberUid=${username})(gidNumber=${gidNumbe
 gerrit_ldap_group_name: cn
 
 gerrit_plugins_allow_remote_admin: false
+gerrit_extra_config_list:
+  - { section: core, option: packedGitOpenFiles, value: 1024 }
+
+gerrit_extra_secure_config_list: []
