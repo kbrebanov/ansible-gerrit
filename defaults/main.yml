@@ -36,3 +36,5 @@ gerrit_extra_config_list:
   - { section: core, option: packedGitOpenFiles, value: 1024 }
 
 gerrit_extra_secure_config_list: []
+
+gerrit_service_after: syslog.target network.target

@@ -2,7 +2,7 @@
 # handlers file for gerrit
 
 - name: restart gerrit
-  service: name={{ gerrit_service_name }} state=restarted
+  systemd: name={{ gerrit_service_name }} state=restarted
   tags: gerrit
 
 - name: reindex gerrit

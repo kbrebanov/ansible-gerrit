@@ -162,24 +162,33 @@
   tags: gerrit
 
 - name: Save Initialization Options
-  copy: >
-    content="{{ gerrit_init_options }}"
-    dest={{ gerrit_site_dir }}/tmp/init_options
-  register: init_options_log
+  copy:
+    content: >
+      java -jar /opt/gerrit/gerrit-{{ gerrit_version }}.war init
+      --batch
+      --no-auto-start
+      -d {{ gerrit_site_dir }}
+      {{ gerrit_init_options }}
+    dest: '{{ gerrit_site_dir }}/tmp/gerrit-init.sh'
+    mode: 0755
+  register: init_script
+  tags: gerrit
+
+- name: Stop Gerrit
+  become: yes
+  become_user: "{{ gerrit_user }}"
+  become_method: sudo
+  systemd: state=stopped name=gerrit
+  when: init_script.changed
   tags: gerrit
 
 - name: Initialize Gerrit
   become: yes
   become_user: "{{ gerrit_user }}"
   become_method: sudo
-  command: >
-    java -jar /opt/gerrit/gerrit.war init
-    --batch
-    --no-auto-start
-    -d {{ gerrit_site_dir }}
-    {{ gerrit_init_options }}
+  shell: '{{ gerrit_site_dir }}/tmp/gerrit-init.sh'
   register: initialization
-  when: init_options_log.changed
+  when: init_script.changed
   tags: gerrit
 
 - name: Reindexing Gerrit
@@ -200,13 +209,22 @@
   notify: restart gerrit
   tags: gerrit
 
-- name: Create Gerrit init file link
+- name: Delete Gerrit init file link
   file: >
-    src={{ gerrit_site_dir }}/bin/gerrit.sh
     dest=/etc/init.d/gerrit
-    state=link
+    state=absent
+  tags: gerrit
+
+- name: Install Gerrit systemd service file
+  template: >
+    src=gerrit.service.j2
+    dest=/etc/systemd/system/{{ gerrit_service_name }}.service
+    owner=root
+    group=root
+    mode=0644
+  notify: restart gerrit
   tags: gerrit
 
 - name: Ensure Gerrit service is started and enabled on boot
-  service: name={{ gerrit_service_name }} state=started enabled=yes
+  systemd: state=started name={{ gerrit_service_name }} enabled=yes
   tags: gerrit
