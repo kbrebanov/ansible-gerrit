@@ -1,0 +1,17 @@
+# Systemd unit file for gerrit
+
+[Unit]
+Description=Gerrit Code Review
+After={{ gerrit_service_after }}
+
+[Service]
+Type=simple
+WorkingDirectory={{ gerrit_site_dir }}
+Environment=GERRIT_HOME={{ gerrit_site_dir }} JAVA_HOME={{ gerrit_container_java_home }}
+ExecStart=/usr/bin/java -Xmx2048m -jar ${GERRIT_HOME}/bin/gerrit.war daemon -d ${GERRIT_HOME}
+User={{ gerrit_user }}
+SyslogIdentifier=GerritCodeReview
+#StandardInput=socket
+
+[Install]
+WantedBy=multi-user.target

@@ -88,32 +88,6 @@
     state=directory
   tags: gerrit
 
-- name: Create Gerrit configuration file
-  template: >
-    src=gerrit.config.j2
-    dest={{ gerrit_site_dir }}/etc/gerrit.config
-    owner={{ gerrit_user }}
-    group={{ gerrit_group }}
-    mode=0644
-  notify: restart gerrit
-  tags: gerrit
-
-- name: Create Gerrit secure configuration file
-  template: >
-    src=secure.config.j2
-    dest={{ gerrit_site_dir }}/etc/secure.config
-    owner={{ gerrit_user }}
-    group={{ gerrit_group }}
-    mode=0600
-  notify: restart gerrit
-  tags: gerrit
-
-- name: Set Initialization Options
-  set_fact:
-    gerrit_init_options: >
-      {% for plugin in gerrit_install_plugins %} --install-plugin {{ plugin }} {% endfor %}
-  tags: gerrit
-
 - name: Create Gerrit tmp directory
   file: >
     path={{ gerrit_site_dir }}/tmp
@@ -123,25 +97,98 @@
     state=directory
   tags: gerrit
 
-- name: Save Initialization Options
+- name: Create temporary Gerrit configuration file
+  template: >
+    src=gerrit.config.j2
+    dest={{ gerrit_site_dir }}/tmp/gerrit.config
+    owner={{ gerrit_user }}
+    group={{ gerrit_group }}
+    mode=0644
+  changed_when: False
+  tags: gerrit
+
+- name: Modify temporary Gerrit configuration file
+  ini_file: >
+    dest={{ gerrit_site_dir }}/tmp/gerrit.config
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+    backup=yes
+  with_items: '{{ gerrit_extra_config_list }}'
+  changed_when: False
+  tags: gerrit
+
+- name: Copy Gerrit configuration file
   copy: >
-    content="{{ gerrit_init_options }}"
-    dest={{ gerrit_site_dir }}/tmp/init_options
-  register: init_options_log
+    src={{ gerrit_site_dir }}/tmp/gerrit.config
+    dest={{ gerrit_site_dir }}/etc/gerrit.config
+    remote_src=yes
+  notify: restart gerrit
+  tags: gerrit
+
+- name: Create temporary Gerrit secure configuration file
+  template: >
+    src=secure.config.j2
+    dest={{ gerrit_site_dir }}/tmp/secure.config
+    owner={{ gerrit_user }}
+    group={{ gerrit_group }}
+    mode=0600
+  changed_when: False
+  tags: gerrit
+
+- name: Modify temporary Gerrit secure configuration file
+  ini_file: >
+    dest={{ gerrit_site_dir }}/tmp/secure.config
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+    backup=yes
+  with_items: '{{ gerrit_extra_secure_config_list }}'
+  changed_when: False
+  tags: gerrit
+
+- name: Copy Gerrit secure configuration file
+  copy: >
+    src={{ gerrit_site_dir }}/tmp/secure.config
+    dest={{ gerrit_site_dir }}/etc/secure.config
+    remote_src=yes
+  notify: restart gerrit
+  tags: gerrit
+
+- name: Set Initialization Options
+  set_fact:
+    gerrit_init_options: >
+      {% for plugin in gerrit_install_plugins %} --install-plugin {{ plugin }} {% endfor %}
+  tags: gerrit
+
+- name: Save Initialization Options
+  copy:
+    content: >
+      java -jar /opt/gerrit/gerrit-{{ gerrit_version }}.war init
+      --batch
+      --no-auto-start
+      -d {{ gerrit_site_dir }}
+      {{ gerrit_init_options }}
+    dest: '{{ gerrit_site_dir }}/tmp/gerrit-init.sh'
+    mode: 0755
+  register: init_script
+  tags: gerrit
+
+- name: Stop Gerrit
+  become: yes
+  become_user: "{{ gerrit_user }}"
+  become_method: sudo
+  systemd: state=stopped name=gerrit
+  when: init_script.changed
   tags: gerrit
 
 - name: Initialize Gerrit
   become: yes
   become_user: "{{ gerrit_user }}"
   become_method: sudo
-  command: >
-    java -jar /opt/gerrit/gerrit.war init
-    --batch
-    --no-auto-start
-    -d {{ gerrit_site_dir }}
-    {{ gerrit_init_options }}
+  shell: '{{ gerrit_site_dir }}/tmp/gerrit-init.sh'
   register: initialization
-  when: init_options_log.changed
+  when: init_script.changed
   tags: gerrit
 
 - name: Reindexing Gerrit
@@ -162,13 +209,22 @@
   notify: restart gerrit
   tags: gerrit
 
-- name: Create Gerrit init file link
+- name: Delete Gerrit init file link
   file: >
-    src={{ gerrit_site_dir }}/bin/gerrit.sh
     dest=/etc/init.d/gerrit
-    state=link
+    state=absent
+  tags: gerrit
+
+- name: Install Gerrit systemd service file
+  template: >
+    src=gerrit.service.j2
+    dest=/etc/systemd/system/{{ gerrit_service_name }}.service
+    owner=root
+    group=root
+    mode=0644
+  notify: restart gerrit
   tags: gerrit
 
 - name: Ensure Gerrit service is started and enabled on boot
-  service: name={{ gerrit_service_name }} state=started enabled=yes
+  systemd: state=started name={{ gerrit_service_name }} enabled=yes
   tags: gerrit
