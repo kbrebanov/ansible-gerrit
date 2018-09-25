@@ -4,7 +4,7 @@
 [database]
         type = {{ gerrit_database_type }}
         database = {{ gerrit_database_db }}
-{% if gerrit_database_type == 'postgresql' %}
+{% if gerrit_database_type in ['postgresql', 'mysql'] %}
         hostname = {{ gerrit_database_hostname }}
         username = {{ gerrit_database_username }}
 {% endif %}
@@ -45,3 +45,7 @@
         directory = cache
 [plugins]
         allowRemoteAdmin = {{ gerrit_plugins_allow_remote_admin }}
+{% if gerrit_run_gitweb %}
+[gitweb]
+	revision = "?p=${project}.git;a=commitdiff;h=${commit}"
+{% endif %}
